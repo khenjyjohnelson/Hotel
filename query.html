@@ -1,0 +1,37 @@
+INSERT INTO faskamar (id_faskamar, tipe, nama, img) VALUES('', '', '', '');
+
+INSERT INTO fashotel (nama, keterangan, img) VALUES ('Kolam Renang', 'Berada di lantai 3 dengan luas 50m persegi', 'kolam.jpg');
+INSERT INTO fashotel (nama, keterangan, img) VALUES  ('Makan Siang', 'Berada di teras hotel dengan luas 5m x 10m', 'lunch.jpg');
+INSERT INTO fashotel (nama, keterangan, img) VALUES  ('Kolam Renang', 'Berada di tengah-tengah hotel dengan luas 20m persegi ', 'dinner.jpg');
+
+INSERT INTO faskamar (tipe, nama, img) VALUES ('superior', 'Kamar berukuran luas 32m2', 'size.jpg');
+INSERT INTO faskamar (tipe, nama, img) VALUES ('superior', 'Kamar mandi shower', 'shower.jpg');
+INSERT INTO faskamar (tipe, nama, img) VALUES ('superior', 'Coffee Maker', 'coffeemaker.jpg');
+INSERT INTO faskamar (tipe, nama, img) VALUES ('superior', 'AC', 'ac.jpg');
+INSERT INTO faskamar (tipe, nama, img) VALUES ('superior', 'LED TV 32 inch', 'tv.jpg');
+INSERT INTO faskamar (tipe, nama, img) VALUES ('deluxe', 'Kamar berukuran luas 45m2', 'size.jpg');
+INSERT INTO faskamar (tipe, nama, img) VALUES ('deluxe', 'Kamar mandi shower', 'bath.jpg');
+INSERT INTO faskamar (tipe, nama, img) VALUES ('deluxe', 'Coffee Maker', 'coffeemaker.jpg');
+INSERT INTO faskamar (tipe, nama, img) VALUES ('deluxe', 'Sofa', 'sofa.jpg');
+INSERT INTO faskamar (tipe, nama, img) VALUES ('deluxe', 'LED TV 40 inch', 'tv.jpg');
+INSERT INTO faskamar (tipe, nama, img) VALUES ('deluxe', 'AC', 'ac.jpg');
+
+INSERT INTO kamar (tipe, img, jlh) VALUES  ('Superior', 'superior.jpg', '40');
+INSERT INTO kamar (tipe, img, jlh) VALUES  ('Deluxe', 'deluxe.jpg', '32');
+
+INSERT INTO pengaturan (nama, favicon, logo, alamat, email, hp, metadesc, fb, ig) VALUES  ('HOTEL HEBAT', 'favicon.png', 'logo.png', 'Jl Peternakan Dlm III 36, Dki Jakarta', 'hotelhebat@gmail.com', '0-21-541-3829', 'Lepaskan diri Anda ke Hotel Hebat, dikelilingi oleh keindahan pegunungan yang indah, danau, dan sawah menghijau. Nikmat sore yang hangat dengan berenang di kolam renang dengan pemandangan matahari terbenam yang memukai; Kid's Club yang luas - menawarkan beragam fasilitas dan kegiatan anak-anak yang akan melengkapi kenyamanan keluarga. Convention Center kami, dilengkapi pelayanan lengkap dengan ruang konvensi terbesar di Bandung, mampu mengakomodasi hingga 3.000 delegasi. Manfaatkan ruang penyelenggaraan konvensi M.I.C.E ataupun mewujudkan acara pernikahan adat yang mewah.', 'http://www.facebook.com/hotel.hebat/', 'http://www.instagram.com/hotelhebat/');
+
+INSERT INTO user (nama, email, password, hp, level) VALUES ('Khenjy', 'khenjy@gmail.com', '$2y$10$GbildcAQnSpLsXP3eUfwdOE8K62QTg9C.I8cAVt2W39/jzji6EInm', ' 081234567890', 'administrator'); 
+INSERT INTO user (nama, email, password, hp, level) VALUES ('Ehren', 'ehren@gmail.com', '$2y$10$GbildcAQnSpLsXP3eUfwdOE8K62QTg9C.I8cAVt2W39/jzji6EInm', ' 081234567890', 'resepsionis'); 
+INSERT INTO user (nama, email, password, hp, level) VALUES ('Billy', 'billy@gmail.com', '$2y$10$GbildcAQnSpLsXP3eUfwdOE8K62QTg9C.I8cAVt2W39/jzji6EInm', ' 081234567890', 'tamu'); 
+INSERT INTO user (nama, email, password, hp, level) VALUES ('Jovan', 'jovan@gmail.com', '$2y$10$GbildcAQnSpLsXP3eUfwdOE8K62QTg9C.I8cAVt2W39/jzji6EInm', ' 081234567890', 'tamu');
+
+
+
+CREATE TRIGGER kurang_kamar AFTER INSERT ON pesanan FOR EACH ROW BEGIN UPDATE kamar SET stok = stok - NEW.jlh WHERE tipe = NEW.tipe; END;
+
+
+CREATE TRIGGER tambah_kamar AFTER DELETE ON pesanan BEGIN 
+UPDATE kamar SET stok = stok + OLD.jlh WHERE tipe = OLD.tipe; END;
+
+INSERT INTO history (id_pesanan, id_user, pemesan, email, hp, tamu, tipe, jlh, cek_in, cek out, status) VALUES (OLD.id_pesanan, OLD.id_user, OLD.pemesan, OLD.email, OLD.hp, OLD.tamu, OLD.tipe, OLD.jlh, OLD.cek_in, OLD.cek out, OLD.status) END;

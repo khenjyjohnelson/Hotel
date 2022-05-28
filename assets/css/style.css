@@ -1,0 +1,60 @@
+@font-face {
+  font-family: Poppy;
+  src: url(../font/Poppins-Medium.ttf);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: Poppy;
+  height: 100%;
+}
+
+#konten {
+  min-height: 100%;
+}
+
+body.login {
+  background-color: aqua;
+}
+
+div.login {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  background-color: white;
+  margin: 40px;
+}
+
+img.img-fluid {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.input-group {
+  margin: 20px 0;
+}
+
+.btn.login {
+  margin-top: 20px;
+  width: 48%;
+}
+
+div.fashotel {
+  margin-bottom: 40px;
+}
+
+.pengaturan {
+  width: 90%;
+}
+
+#notif {
+	height: 50px;
+}
+
+hr {
+  margin-top: -2px;
+}
