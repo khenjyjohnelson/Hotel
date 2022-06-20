@@ -60,8 +60,8 @@ class User extends CI_Controller
 
 		$cekemail = $this->usr->cekemail($email);
 
-		// mencari apakah jumlah data kurang dari 0
-		if ($cekemail->num_rows() < 0) {
+		// mencari apakah jumlah data kurang dari 1
+		if ($cekemail->num_rows() < 1) {
 
 			// jika input konfirm sama dengan input password
 			if ($this->input->post('konfirm') === $password) {
@@ -116,7 +116,7 @@ class User extends CI_Controller
 		);
 
 		$update = $this->usr->update($data, $where);
-		
+
 		if ($update) {
 
 			$this->session->set_flashdata('pesan', 'User berhasil diubah!');
@@ -126,7 +126,7 @@ class User extends CI_Controller
 			$this->session->set_flashdata('pesan', 'User gagal diubah!');
 			$this->session->set_flashdata('panggil', '$("#element").toast("show")');
 		}
-		
+
 		// kembali ke halaman sebelumnya
 		redirect($_SERVER['HTTP_REFERER']);
 	}
@@ -141,7 +141,7 @@ class User extends CI_Controller
 		);
 
 		$update = $this->usr->update($data, $where);
-				
+
 		if ($update) {
 
 			$this->session->set_flashdata('pesan', 'Profil berhasil diubah!');
@@ -151,7 +151,7 @@ class User extends CI_Controller
 			$this->session->set_flashdata('pesan', 'Profil gagal diubah!');
 			$this->session->set_flashdata('panggil', '$("#element").toast("show")');
 		}
-		
+
 		// mengambil data profil yang baru dirubah
 		$user = $this->usr->ambil($where)->result();
 		$nama = $user[0]->nama;
@@ -224,7 +224,7 @@ class User extends CI_Controller
 	{
 		$hapus = $this->usr->hapus($id_user);
 
-				
+
 		if ($hapus) {
 
 			$this->session->set_flashdata('pesan', 'User berhasil dihapus!');
@@ -234,7 +234,7 @@ class User extends CI_Controller
 			$this->session->set_flashdata('pesan', 'User gagal dihapus!');
 			$this->session->set_flashdata('panggil', '$("#element").toast("show")');
 		}
-		
+
 
 		redirect(site_url('user'));
 	}
